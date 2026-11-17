@@ -1,352 +1,82 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#21150b"><title>لوحة تحكم نيو ستايل</title>
 <style>
-:root{--gold:#c99a43;--ink:#21150b}*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:linear-gradient(140deg,#fff9e9,#f3dfc7 55%,#fff8e9);color:var(--ink);padding:14px}.panel{max-width:720px;margin:10px auto;background:#fffaf0;border:2px solid var(--gold);border-radius:16px;padding:18px;box-shadow:0 15px 45px #0002}.header-bar{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--gold);padding-bottom:10px;margin-bottom:15px}.header-bar h2{margin:0;color:#6b4512;font-size:20px}.store-link{text-decoration:none;background:#218b51;color:white;padding:7px 12px;border-radius:8px;font-size:13px;font-weight:bold}.panel input,.panel select,.panel button{width:100%;padding:11px;margin:6px 0;border:1px solid #d8bd85;border-radius:8px;font:inherit}.panel button{background:#6b4512;color:white;font-weight:bold;cursor:pointer}.panel button:disabled{opacity:0.6;cursor:wait}.panel button.secondary{background:#8b7770}.panel button.danger{background:#a83232}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.adminitem{background:#f4e8d3;border-radius:9px;padding:9px;margin:8px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.adminitem img{width:48px;height:55px;object-fit:cover;border-radius:6px}.adminitem span{flex:1;font-size:13px;min-width:100px}.adminitem button{width:auto;margin:0;padding:7px}.section-title{border-bottom:1px solid #dfbd7b;padding-bottom:7px;margin-top:22px;color:#543512}.security-box{background:#f9efe0;border:1px dashed #c99a43;padding:12px;border-radius:10px;margin-top:22px}.preview-grid{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.preview-card{position:relative;width:72px;height:80px;border-radius:8px;overflow:hidden;border:1px solid #c99a43}.preview-card img{width:100%;height:100%;object-fit:cover}.preview-card button{position:absolute;top:2px;left:2px;width:22px;height:22px;padding:0;margin:0;background:#a83232;color:white;border:none;border-radius:50%;font-size:13px;line-height:1}
-</style></head><body>
-<div class="panel">
-  <div class="header-bar">
-    <h2>لوحة تحكم نيو ستايل</h2>
-    <a class="store-link" href="/" target="_blank">معاينة المتجر ↗</a>
-  </div>
-
-  <div id="login">
-    <p>أدخل كلمة المرور لإدارة المتجر:</p>
-    <input type="password" id="pass" placeholder="كلمة المرور" onkeyup="if(event.key==='Enter')login()">
-    <button id="loginBtn" onclick="login()">تسجيل الدخول</button>
-  </div>
-
-  <div id="editor" style="display:none">
-    <h3 class="section-title">إدارة الأقسام</h3>
-    <div class="row"><input id="newCategory" placeholder="اسم القسم الجديد"><button id="addCatBtn" onclick="addCategory()">إضافة قسم</button></div>
-    <div id="categoryAdmin"></div>
-
-    <h3 class="section-title" id="formtitle">إضافة منتج (حتى 5 صور)</h3>
-    <input id="pname" placeholder="اسم المنتج">
-    <input id="pprice" placeholder="السعر (مثال: 5000)">
-    <select id="pcurrency" aria-label="عملة السعر">
-      <option value="YER">ريال يمني</option>
-      <option value="SAR">ريال سعودي</option>
-    </select>
-    <input id="pwa" placeholder="رقم واتساب" value="967773801095">
-    <select id="pcategory"></select>
-    <label>صور المنتج (يمكنك تحديد من 1 إلى 5 صور):</label>
-    <input id="pimage" type="file" accept="image/*" multiple>
-    <div class="preview-grid" id="previewGrid"></div>
-    <div class="row"><button id="saveBtn" onclick="saveProduct()">حفظ المنتج</button><button class="secondary" onclick="resetForm()">إلغاء التعديل</button></div>
-
-    <h3 class="section-title">المنتجات الحالية</h3>
-    <div class="adminlist" id="adminlist"><p>جاري تحميل البيانات...</p></div>
-
-    <div class="security-box">
-      <h3 style="margin-top:0;color:#543512;font-size:16px">🔐 تغيير كلمة مرور لوحة التحكم</h3>
-      <div class="row">
-        <input type="password" id="newPassInput" placeholder="اكتب كلمة المرور الجديدة">
-        <button id="changePassBtn" class="secondary" onclick="changePassword()">تحديث كلمة المرور</button>
-      </div>
-    </div>
-
-    <button class="danger" style="margin-top:20px" onclick="logout()">تسجيل الخروج</button>
-  </div>
-</div>
-
+:root{--gold:#c99a43;--ink:#21150b}*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:linear-gradient(140deg,#fff9e9,#f3dfc7 55%,#fff8e9);color:var(--ink);padding:14px}
+.panel{max-width:760px;margin:10px auto;background:#fffaf0;border:2px solid var(--gold);border-radius:16px;padding:18px;box-shadow:0 15px 45px #0002}.header-bar{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--gold);padding-bottom:10px;margin-bottom:15px}.header-bar h2{margin:0;color:#6b4512;font-size:20px}.store-link{text-decoration:none;background:#218b51;color:white;padding:7px 12px;border-radius:8px;font-size:13px;font-weight:bold}
+.panel input,.panel select,.panel textarea,.panel button{width:100%;padding:11px;margin:6px 0;border:1px solid #d8bd85;border-radius:8px;font:inherit}.panel button{background:#6b4512;color:white;font-weight:bold;cursor:pointer}.panel button:disabled{opacity:.6;cursor:wait}.panel button.secondary{background:#8b7770}.panel button.danger{background:#a83232}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.adminitem{background:#f4e8d3;border-radius:9px;padding:9px;margin:8px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.adminitem img{width:48px;height:55px;object-fit:cover;border-radius:6px}.adminitem span{flex:1;font-size:13px;min-width:100px}.adminitem button{width:auto;margin:0;padding:7px}.section-title{border-bottom:1px solid #dfbd7b;padding-bottom:7px;margin:0;color:#543512}
+.security-box{background:#f9efe0;border:1px dashed #c99a43;padding:12px;border-radius:10px;margin-top:14px}.preview-grid{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.preview-card{position:relative;width:72px;height:80px;border-radius:8px;overflow:hidden;border:1px solid #c99a43}.preview-card img{width:100%;height:100%;object-fit:cover}.preview-card button{position:absolute;top:2px;left:2px;width:22px;height:22px;padding:0;margin:0;background:#a83232;color:white;border:none;border-radius:50%}
+.accordion{border:1px solid #dfbd7b;border-radius:10px;margin:12px 0;overflow:hidden}.accordion-head{width:100%;display:flex;justify-content:space-between;align-items:center;text-align:right;background:#f4e8d3!important;color:#543512!important;margin:0!important;border:0!important;border-radius:0!important}.accordion-body{display:none;padding:12px;background:#fffaf0}.accordion.open .accordion-body{display:block}.hint{font-size:12px;color:#78654b;line-height:1.7}.color-row{display:grid;grid-template-columns:1fr 75px;gap:8px;align-items:center}.color-row input[type=color]{height:42px;padding:3px}.checkline{display:flex;align-items:center;gap:8px;margin:8px 0}.checkline input{width:auto;margin:0}
+</style></head><body><div class="panel">
+<div class="header-bar"><h2>لوحة تحكم نيو ستايل</h2><a class="store-link" href="/" target="_blank">معاينة المتجر ↗</a></div>
+<div id="login"><p>أدخل كلمة المرور لإدارة المتجر:</p><input type="password" id="pass" placeholder="كلمة المرور" onkeyup="if(event.key==='Enter')login()"><button id="loginBtn" onclick="login()">تسجيل الدخول</button></div>
+<div id="editor" style="display:none">
+<section class="accordion open"><button class="accordion-head" onclick="toggleAccordion(this)">إدارة الأقسام <span>＋</span></button><div class="accordion-body">
+<div class="row"><input id="newCategory" placeholder="اسم القسم الجديد"><button id="addCatBtn" onclick="addCategory()">إضافة قسم</button></div><div id="categoryAdmin"></div>
+</div></section>
+<section class="accordion"><button class="accordion-head" onclick="toggleAccordion(this)">إضافة / تعديل منتج <span>＋</span></button><div class="accordion-body">
+<h3 class="section-title" id="formtitle">إضافة منتج (حتى 5 صور)</h3>
+<input id="pname" placeholder="اسم المنتج"><input id="pprice" placeholder="السعر (مثال: 5000)">
+<select id="pcurrency"><option value="YER">ريال يمني</option><option value="SAR">ريال سعودي</option></select>
+<input id="pwa" placeholder="رقم واتساب" value="967773801095"><select id="pcategory"></select>
+<textarea id="pdescription" rows="3" placeholder="وصف المنتج (اختياري)"></textarea>
+<input id="pageCategory" placeholder="الفئة العمرية مثال: 3-5 سنوات (لقسم الأطفال)">
+<label class="checkline"><input type="checkbox" id="pfeatured"> عرض المنتج في قسم العروض والخصومات</label>
+<label>صور المنتج (من 1 إلى 5 صور):</label><input id="pimage" type="file" accept="image/*" multiple><div class="preview-grid" id="previewGrid"></div>
+<div class="row"><button id="saveBtn" onclick="saveProduct()">حفظ المنتج</button><button class="secondary" onclick="resetForm()">إلغاء التعديل</button></div>
+</div></section>
+<section class="accordion"><button class="accordion-head" onclick="toggleAccordion(this)">إعدادات الألوان والتصميم <span>＋</span></button><div class="accordion-body">
+<p class="hint">تغييرات الألوان تحفظ في بيانات المتجر وتظهر للزوار.</p>
+<div id="globalColors"></div><h4>ألوان الأقسام</h4><div id="categoryColors"></div>
+<button onclick="resetColors()" class="secondary">استعادة الألوان الافتراضية</button><button onclick="saveSettings()">حفظ إعدادات التصميم</button>
+</div></section>
+<section class="accordion"><button class="accordion-head" onclick="toggleAccordion(this)">أرقام التواصل <span>＋</span></button><div class="accordion-body">
+<label>رقم واتساب الأول</label><input id="phone1" placeholder="9677xxxxxxx"><label>النص الظاهر للرقم الأول</label><input id="phone1Label" placeholder="+967 ..."><div class="color-row"><span>لون زر الرقم الأول</span><input type="color" id="phone1Color"></div>
+<label>رقم واتساب الثاني</label><input id="phone2" placeholder="9677xxxxxxx"><label>النص الظاهر للرقم الثاني</label><input id="phone2Label" placeholder="+967 ..."><div class="color-row"><span>لون زر الرقم الثاني</span><input type="color" id="phone2Color"></div>
+<button onclick="saveSettings()">حفظ بيانات التواصل</button>
+</div></section>
+<section class="accordion"><button class="accordion-head" onclick="toggleAccordion(this)">المنتجات الحالية <span>＋</span></button><div class="accordion-body"><div id="adminlist"><p>جاري تحميل البيانات...</p></div></div></section>
+<section class="accordion"><button class="accordion-head" onclick="toggleAccordion(this)">الأمان وكلمة المرور <span>＋</span></button><div class="accordion-body">
+<div class="security-box"><h3 style="margin-top:0;color:#543512;font-size:16px">🔐 تغيير كلمة مرور لوحة التحكم</h3><div class="row"><input type="password" id="newPassInput" placeholder="كلمة المرور الجديدة"><button id="changePassBtn" class="secondary" onclick="changePassword()">تحديث كلمة المرور</button></div></div>
+<button class="danger" onclick="logout()">تسجيل الخروج</button>
+</div></section>
+</div></div>
 <script>
-const defaultCategories=['ملابس أطفال','قسم عطور','قسم مكياج','قسم شامبو','قسم الجمال'];
+const defaultCategories=['عروض وخصومات','ملابس أطفال','قسم عطور','قسم مكياج','قسم شامبو','قسم الجمال'];
 const kidsSeed=[
-  {id:101,name:'فستان أطفال AK472',price:'السعر عند التواصل',image:'images/kids_AK472.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'},
-  {id:102,name:'فستان أطفال SA6189',price:'السعر عند التواصل',image:'images/kids_SA6189.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'},
-  {id:103,name:'فستان أطفال SA5975',price:'السعر عند التواصل',image:'images/kids_SA5975.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'},
-  {id:104,name:'فستان أطفال SA6233',price:'السعر عند التواصل',image:'images/kids_SA6233.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'},
-  {id:105,name:'فستان أطفال 82457',price:'السعر عند التواصل',image:'images/kids_82457.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'},
-  {id:106,name:'فستان أطفال SA5981',price:'السعر عند التواصل',image:'images/kids_SA5981.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'},
-  {id:107,name:'فستان أطفال SA6190',price:'السعر عند التواصل',image:'images/kids_SA6190.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'},
-  {id:108,name:'فستان أطفال SA6245',price:'السعر عند التواصل',image:'images/kids_SA6245.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'},
-  {id:109,name:'فستان أطفال AK465',price:'السعر عند التواصل',image:'images/kids_AK465.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'},
-  {id:110,name:'فستان أطفال SA6241',price:'السعر عند التواصل',image:'images/kids_SA6241.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'}
-];
-
-let categories=[...defaultCategories];
-let items=[...kidsSeed];
-let editing=null,adminPass='';
-// قائمة الصور الحالية في النموذج: كل عنصر {url?: string, base64?: string, filename?: string}
-let draftImages=[];
-
-function getProductImages(p){
-  if(Array.isArray(p.images) && p.images.length) return p.images;
-  return p.image ? [p.image] : [];
-}
-
-async function loadStoreData(){
-  try{
-    const res=await fetch('/api/store');
-    const data=await res.json();
-    if(data.categories && data.categories.length) categories=data.categories;
-    if(data.items) items=data.items;
-  }catch(e){
-    console.error('فشل جلب البيانات:',e);
-  }
-  renderAdmin();
-}
-
-async function persist(){
-  const res=await fetch('/api/store',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({
-      password:adminPass,
-      action:'saveData',
-      payload:{categories,items}
-    })
-  });
-  if(!res.ok) throw new Error('فشل الحفظ في السيرفر');
-}
-
-async function login(){
-  const p=document.getElementById('pass').value;
-  if(!p){alert('أدخل كلمة المرور');return}
-  const btn=document.getElementById('loginBtn');
-  btn.disabled=true;btn.textContent='جاري التحقق...';
-  try{
-    const res=await fetch('/api/store',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({password:p,action:'verifyLogin'})
-    });
-    if(res.ok){
-      adminPass=p;
-      document.getElementById('login').style.display='none';
-      document.getElementById('editor').style.display='block';
-      loadStoreData();
-    }else{
-      alert('كلمة المرور غير صحيحة');
-    }
-  }catch(e){
-    alert('تعذر الاتصال بالسيرفر');
-  }finally{
-    btn.disabled=false;btn.textContent='تسجيل الدخول';
-  }
-}
-
-async function changePassword(){
-  const newPass=document.getElementById('newPassInput').value.trim();
-  if(newPass.length<4){alert('اكتب كلمة مرور جديدة من 4 أحرف أو أكثر');return}
-  if(!confirm('هل أنت متأكد من حذف كلمة المرور السابقة واعتماد الجديدة؟'))return;
-
-  const btn=document.getElementById('changePassBtn');
-  btn.disabled=true;btn.textContent='جاري التحديث...';
-  try{
-    const res=await fetch('/api/store',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        password:adminPass,
-        action:'changePassword',
-        payload:{newPassword:newPass}
-      })
-    });
-    const data=await res.json();
-    if(!res.ok) throw new Error(data.error||'فشل تغيير كلمة المرور');
-    adminPass=newPass;
-    document.getElementById('newPassInput').value='';
-    alert('تم تغيير كلمة المرور بنجاح وحذف السابقة!');
-  }catch(e){
-    alert('خطأ: '+e.message);
-  }finally{
-    btn.disabled=false;btn.textContent='تحديث كلمة المرور';
-  }
-}
-
-function logout(){
-  adminPass='';
-  document.getElementById('pass').value='';
-  document.getElementById('editor').style.display='none';
-  document.getElementById('login').style.display='block';
-}
-
-function compressFile(file){
-  return new Promise(resolve=>{
-    const filename=file.name.replace(/[^a-zA-Z0-9.]/g,'_')||'product.jpg';
-    const r=new FileReader();
-    r.onload=()=>{
-      const im=new Image();
-      im.onload=()=>{
-        const c=document.createElement('canvas'),max=1000,scale=Math.min(1,max/Math.max(im.width,im.height));
-        c.width=Math.round(im.width*scale);c.height=Math.round(im.height*scale);
-        c.getContext('2d').drawImage(im,0,0,c.width,c.height);
-        resolve({base64:c.toDataURL('image/jpeg',.82),filename});
-      };
-      im.src=r.result;
-    };
-    r.readAsDataURL(file);
-  });
-}
-
-document.getElementById('pimage').addEventListener('change',async e=>{
-  const files=Array.from(e.target.files||[]);
-  if(!files.length) return;
-  const remaining=5-draftImages.length;
-  if(remaining<=0){
-    alert('الحد الأقصى 5 صور لكل منتج. احذف صورة أولاً لإضافة غيرها.');
-    e.target.value='';
-    return;
-  }
-  if(files.length>remaining){
-    alert('يمكنك إضافة '+remaining+' صور إضافية فقط (الحد الأقصى 5 صور).');
-  }
-  const selected=files.slice(0,remaining);
-  for(const f of selected){
-    const compressed=await compressFile(f);
-    draftImages.push(compressed);
-  }
-  e.target.value='';
-  renderPreviews();
-});
-
-function renderPreviews(){
-  const grid=document.getElementById('previewGrid');
-  grid.innerHTML='';
-  draftImages.forEach((item,idx)=>{
-    const card=document.createElement('div');card.className='preview-card';
-    const img=document.createElement('img');img.src=item.url||item.base64;
-    const del=document.createElement('button');del.textContent='×';del.title='حذف الصورة';
-    del.onclick=()=>{draftImages.splice(idx,1);renderPreviews()};
-    card.append(img,del);grid.append(card);
-  });
-}
-
-async function saveProduct(){
-  let name=document.getElementById('pname').value.trim(),price=document.getElementById('pprice').value.trim(),currency=document.getElementById('pcurrency').value,wa=document.getElementById('pwa').value.trim()||'967773801095',category=document.getElementById('pcategory').value;
-  if(!name){alert('اكتب اسم المنتج');return}
-  if(!category){alert('أضف قسماً أولاً');return}
-  if(!draftImages.length){alert('اختر صورة واحدة على الأقل للمنتج');return}
-
-  const btn=document.getElementById('saveBtn');
-  btn.disabled=true;
-
-  try{
-    const finalUrls=[];
-    for(let i=0;i<draftImages.length;i++){
-      const item=draftImages[i];
-      if(item.url){
-        finalUrls.push(item.url);
-      }else if(item.base64){
-        btn.textContent='جاري رفع الصورة '+(i+1)+' من '+draftImages.length+'...';
-        const upRes=await fetch('/api/store',{
-          method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({
-            password:adminPass,
-            action:'uploadImage',
-            payload:{base64:item.base64,filename:item.filename}
-          })
-        });
-        const upData=await upRes.json();
-        if(!upRes.ok) throw new Error(upData.error||'فشل رفع الصورة');
-        finalUrls.push(upData.url);
-      }
-    }
-
-    btn.textContent='جاري حفظ البيانات...';
-    if(editing!==null){
-      let p=items.find(x=>x.id===editing);
-      if(!p)return;
-      p.name=name;p.price=price;p.currency=currency;p.wa=wa;p.category=category;
-      p.image=finalUrls[0];
-      p.images=finalUrls;
-    }else{
-      items.unshift({
-        id:Date.now(),name,price,currency,wa,category,
-        image:finalUrls[0],
-        images:finalUrls,
-        buttonText:'اطلبي عبر واتساب'
-      });
-    }
-
-    await persist();
-    resetForm();
-    renderAdmin();
-    alert('تم حفظ المنتج بجميع صوره بنجاح!');
-  }catch(err){
-    alert('حدث خطأ: '+err.message);
-  }finally{
-    btn.disabled=false;btn.textContent='حفظ المنتج';
-  }
-}
-
-function resetForm(){
-  editing=null;draftImages=[];renderPreviews();
-  document.getElementById('pname').value='';
-  document.getElementById('pprice').value='';
-  document.getElementById('pcurrency').value='YER';
-  document.getElementById('pwa').value='967773801095';
-  document.getElementById('pimage').value='';
-  document.getElementById('formtitle').textContent='إضافة منتج (حتى 5 صور)';
-}
-
-async function addCategory(){
-  let name=document.getElementById('newCategory').value.trim();
-  if(!name){alert('اكتب اسم القسم');return}
-  if(categories.includes(name)){alert('القسم موجود مسبقاً');return}
-  const btn=document.getElementById('addCatBtn');
-  btn.disabled=true;btn.textContent='جاري الحفظ...';
-  try{
-    categories.push(name);
-    document.getElementById('newCategory').value='';
-    await persist();
-    renderAdmin();
-  }catch(err){
-    categories.pop();
-    alert('فشل إضافة القسم: '+err.message);
-  }finally{
-    btn.disabled=false;btn.textContent='إضافة قسم';
-  }
-}
-
-async function deleteCategory(name){
-  if(items.some(p=>p.category===name)){alert('لا يمكن حذف قسم يحتوي منتجات. احذف منتجات القسم أولاً.');return}
-  if(!confirm('حذف القسم «'+name+'»؟'))return;
-  const backup=[...categories];
-  categories=categories.filter(c=>c!==name);
-  try{
-    await persist();
-    renderAdmin();
-  }catch(err){
-    categories=backup;
-    alert('فشل الحذف: '+err.message);
-  }
-}
-
-function renderAdmin(){
-  let sel=document.getElementById('pcategory');
-  let chosen=sel.value;sel.innerHTML='';
-  categories.forEach(cat=>{let o=document.createElement('option');o.value=cat;o.textContent=cat;sel.append(o)});
-  if(categories.includes(chosen))sel.value=chosen;else if(categories.length)sel.value=categories[0];
-
-  let cats=document.getElementById('categoryAdmin');cats.innerHTML='';
-  categories.forEach(cat=>{let d=document.createElement('div');d.className='adminitem';let s=document.createElement('span');s.textContent=cat;let del=document.createElement('button');del.className='danger';del.textContent='حذف القسم';del.onclick=()=>deleteCategory(cat);d.append(s,del);cats.append(d)});
-
-  let list=document.getElementById('adminlist');list.innerHTML='';
-  items.forEach(p=>{
-    const imgs=getProductImages(p);
-    let d=document.createElement('div');d.className='adminitem';
-    let im=document.createElement('img');im.src=imgs[0]||'';
-    let s=document.createElement('span');
-    s.textContent=p.name+' — '+(p.price||'السعر عند التواصل')+' ['+p.category+'] ('+imgs.length+' صور)';
-    let edit=document.createElement('button');edit.textContent='تعديل';
-    edit.onclick=()=>{
-      editing=p.id;
-      draftImages=imgs.map(u=>({url:u}));
-      renderPreviews();
-      document.getElementById('pname').value=p.name;
-      document.getElementById('pprice').value=p.price||'';
-      document.getElementById('pcurrency').value=p.currency||'YER';
-      document.getElementById('pwa').value=p.wa||'967773801095';
-      document.getElementById('pcategory').value=p.category;
-      document.getElementById('formtitle').textContent='تعديل المنتج (يمكنك إضافة أو حذف صور حتى 5)';
-      window.scrollTo({top:0,behavior:'smooth'});
-    };
-    let del=document.createElement('button');del.className='danger';del.textContent='حذف';
-    del.onclick=async()=>{if(confirm('حذف المنتج؟')){const backup=[...items];items=items.filter(x=>x.id!==p.id);try{await persist();renderAdmin()}catch(e){items=backup;alert('فشل الحذف')}}};
-    d.append(im,s,edit,del);list.append(d);
-  });
-}
+{id:101,name:'فستان أطفال AK472',price:'السعر عند التواصل',image:'images/kids_AK472.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'},
+{id:102,name:'فستان أطفال SA6189',price:'السعر عند التواصل',image:'images/kids_SA6189.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'},
+{id:103,name:'فستان أطفال SA5975',price:'السعر عند التواصل',image:'images/kids_SA5975.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'},
+{id:104,name:'فستان أطفال SA6233',price:'السعر عند التواصل',image:'images/kids_SA6233.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'},
+{id:105,name:'فستان أطفال 82457',price:'السعر عند التواصل',image:'images/kids_82457.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'},
+{id:106,name:'فستان أطفال SA5981',price:'السعر عند التواصل',image:'images/kids_SA5981.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'},
+{id:107,name:'فستان أطفال SA6190',price:'السعر عند التواصل',image:'images/kids_SA6190.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'},
+{id:108,name:'فستان أطفال SA6245',price:'السعر عند التواصل',image:'images/kids_SA6245.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'},
+{id:109,name:'فستان أطفال AK465',price:'السعر عند التواصل',image:'images/kids_AK465.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'},
+{id:110,name:'فستان أطفال SA6241',price:'السعر عند التواصل',image:'images/kids_SA6241.jpg',wa:'967773801095',category:'ملابس أطفال',buttonText:'اطلبي عبر واتساب'}];
+const defaultSettings={pageBg:'#fff9e9',textColor:'#21150b',headerBg:'#201309',accent:'#6b4512',gold:'#c99a43',buy:'#218b51',phone1:'967773801095',phone2:'967733283850',phone1Label:'+967 773 801 095',phone2Label:'+967 733 283 850',phone1Color:'#218b51',phone2Color:'#218b51',categoryColors:{}};
+let categories=[...defaultCategories],items=[...kidsSeed],settings={...defaultSettings},editing=null,adminPass='',draftImages=[];
+function getProductImages(p){return Array.isArray(p.images)&&p.images.length?p.images:(p.image?[p.image]:[])}
+async function loadStoreData(){try{const r=await fetch('/api/store');if(!r.ok)throw Error('فشل تحميل البيانات');const d=await r.json();if(Array.isArray(d.categories)&&d.categories.length)categories=d.categories;if(!categories.includes('عروض وخصومات'))categories.unshift('عروض وخصومات');if(Array.isArray(d.items))items=d.items;settings={...defaultSettings,...(d.settings||{})}}catch(e){console.error(e)}renderAdmin();renderSettings()}
+async function persist(){const r=await fetch('/api/store',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:adminPass,action:'saveData',payload:{categories,items,settings}})});const d=await r.json();if(!r.ok)throw Error(d.error||'فشل الحفظ')}
+async function login(){const p=document.getElementById('pass').value;if(!p){alert('أدخل كلمة المرور');return}const b=document.getElementById('loginBtn');b.disabled=true;b.textContent='جاري التحقق...';try{const r=await fetch('/api/store',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:p,action:'verifyLogin'})});if(!r.ok)throw Error('كلمة المرور غير صحيحة');adminPass=p;document.getElementById('login').style.display='none';document.getElementById('editor').style.display='block';await loadStoreData()}catch(e){alert(e.message)}finally{b.disabled=false;b.textContent='تسجيل الدخول'}}
+async function changePassword(){const np=document.getElementById('newPassInput').value.trim();if(np.length<8){alert('استخدم كلمة مرور من 8 أحرف على الأقل');return}if(!confirm('تأكيد تغيير كلمة المرور؟'))return;const b=document.getElementById('changePassBtn');b.disabled=true;try{const r=await fetch('/api/store',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:adminPass,action:'changePassword',payload:{newPassword:np}})});const d=await r.json();if(!r.ok)throw Error(d.error||'فشل التغيير');adminPass=np;document.getElementById('newPassInput').value='';alert('تم تغيير كلمة المرور')}catch(e){alert(e.message)}finally{b.disabled=false}}
+function logout(){adminPass='';document.getElementById('pass').value='';document.getElementById('editor').style.display='none';document.getElementById('login').style.display='block'}
+function toggleAccordion(btn){const target=btn.parentElement;document.querySelectorAll('.accordion').forEach(x=>{if(x!==target)x.classList.remove('open')});target.classList.toggle('open')}
+function compressFile(file){return new Promise((resolve,reject)=>{const filename=file.name.replace(/[^a-zA-Z0-9.]/g,'_')||'product.jpg';const r=new FileReader();r.onerror=()=>reject(Error('تعذرت قراءة الصورة'));r.onload=()=>{const im=new Image();im.onerror=()=>reject(Error('ملف صورة غير صالح'));im.onload=()=>{const c=document.createElement('canvas'),max=1000,scale=Math.min(1,max/Math.max(im.width,im.height));c.width=Math.round(im.width*scale);c.height=Math.round(im.height*scale);c.getContext('2d').drawImage(im,0,0,c.width,c.height);resolve({base64:c.toDataURL('image/jpeg',.82),filename})};im.src=r.result};r.readAsDataURL(file)})}
+document.getElementById('pimage').addEventListener('change',async e=>{const fs=Array.from(e.target.files||[]);const room=5-draftImages.length;if(fs.length>room)alert('الحد الأقصى 5 صور');try{for(const f of fs.slice(0,room))draftImages.push(await compressFile(f));renderPreviews()}catch(err){alert(err.message)}e.target.value=''});
+function renderPreviews(){const g=document.getElementById('previewGrid');g.innerHTML='';draftImages.forEach((x,i)=>{const d=document.createElement('div');d.className='preview-card';const im=document.createElement('img');im.src=x.url||x.base64;const b=document.createElement('button');b.textContent='×';b.onclick=()=>{draftImages.splice(i,1);renderPreviews()};d.append(im,b);g.append(d)})}
+async function saveProduct(){const name=pname.value.trim(),price=pprice.value.trim(),currency=pcurrency.value,wa=pwa.value.trim()||settings.phone1,category=pcategory.value,description=pdescription.value.trim(),ageCategory=pageCategory.value.trim(),featured=pfeatured.checked;if(!name)return alert('اكتب اسم المنتج');if(!category)return alert('أضف قسماً أولاً');if(!draftImages.length)return alert('اختر صورة واحدة على الأقل');const btn=saveBtn;btn.disabled=true;try{const urls=[];for(let i=0;i<draftImages.length;i++){const x=draftImages[i];if(x.url)urls.push(x.url);else{btn.textContent=`رفع الصورة ${i+1} من ${draftImages.length}`;const r=await fetch('/api/store',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:adminPass,action:'uploadImage',payload:{base64:x.base64,filename:x.filename}})});const d=await r.json();if(!r.ok)throw Error(d.error||'فشل رفع الصورة');urls.push(d.url)}}const old=[...items];if(editing!==null){const p=items.find(x=>x.id===editing);if(!p)throw Error('المنتج غير موجود');Object.assign(p,{name,price,currency,wa,category,description,ageCategory,featured,image:urls[0],images:urls})}else items.unshift({id:Date.now(),name,price,currency,wa,category,description,ageCategory,featured,image:urls[0],images:urls,buttonText:'اطلبي عبر واتساب'});btn.textContent='حفظ البيانات...';await persist();resetForm();renderAdmin();alert('تم حفظ المنتج')}catch(e){alert('تعذر الحفظ: '+e.message)}finally{btn.disabled=false;btn.textContent='حفظ المنتج'}}
+function resetForm(){editing=null;draftImages=[];renderPreviews();['pname','pprice','pdescription','pageCategory'].forEach(id=>document.getElementById(id).value='');pcurrency.value='YER';pwa.value=settings.phone1||defaultSettings.phone1;pfeatured.checked=false;pimage.value='';formtitle.textContent='إضافة منتج (حتى 5 صور)'}
+async function addCategory(){const n=newCategory.value.trim();if(!n)return alert('اكتب اسم القسم');if(categories.includes(n))return alert('القسم موجود');categories.push(n);try{await persist();newCategory.value='';renderAdmin();renderSettings()}catch(e){categories.pop();alert(e.message)}}
+async function deleteCategory(n){if(items.some(p=>p.category===n))return alert('القسم يحتوي منتجات. انقل المنتجات أو احذفها أولاً');if(!confirm('حذف القسم؟'))return;const old=[...categories];categories=categories.filter(x=>x!==n);try{await persist();renderAdmin();renderSettings()}catch(e){categories=old;alert(e.message)}}
+function renderAdmin(){const sel=pcategory,chosen=sel.value;sel.innerHTML='';categories.filter(c=>c!=='عروض وخصومات').forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;sel.append(o)});if(categories.includes(chosen))sel.value=chosen;
+const ca=categoryAdmin;ca.innerHTML='';categories.forEach(cat=>{const d=document.createElement('div');d.className='adminitem';const s=document.createElement('span');s.textContent=cat;const del=document.createElement('button');del.className='danger';del.textContent='حذف القسم';del.onclick=()=>deleteCategory(cat);d.append(s,del);ca.append(d)});
+const list=adminlist;list.innerHTML='';items.forEach(p=>{const imgs=getProductImages(p),d=document.createElement('div');d.className='adminitem';const im=document.createElement('img');im.src=imgs[0]||'';const s=document.createElement('span');s.textContent=p.name+' — '+(p.price||'السعر عند التواصل')+' ['+p.category+']'+(p.featured?' ⭐ عرض':'');const edit=document.createElement('button');edit.textContent='تعديل';edit.onclick=()=>{editing=p.id;draftImages=imgs.map(url=>({url}));renderPreviews();pname.value=p.name||'';pprice.value=p.price||'';pcurrency.value=p.currency||'YER';pwa.value=p.wa||settings.phone1;pdescription.value=p.description||'';pageCategory.value=p.ageCategory||'';pfeatured.checked=!!p.featured;pcategory.value=p.category;formtitle.textContent='تعديل المنتج';document.querySelectorAll('.accordion').forEach(x=>x.classList.remove('open'));document.querySelectorAll('.accordion')[1].classList.add('open');window.scrollTo({top:0,behavior:'smooth'})};const del=document.createElement('button');del.className='danger';del.textContent='حذف';del.onclick=async()=>{if(!confirm('حذف المنتج وصوره غير المستخدمة؟'))return;const old=[...items];items=items.filter(x=>x.id!==p.id);try{await persist();renderAdmin()}catch(e){items=old;alert(e.message)}};d.append(im,s,edit,del);list.append(d)})}
+function colorField(label,id,value){return `<div class="color-row"><span>${label}</span><input type="color" id="${id}" value="${value}"></div>`}
+function renderSettings(){globalColors.innerHTML=colorField('خلفية الموقع','sPageBg',settings.pageBg)+colorField('لون النص','sTextColor',settings.textColor)+colorField('خلفية الرأس','sHeaderBg',settings.headerBg)+colorField('اللون الأساسي','sAccent',settings.accent)+colorField('اللون الذهبي','sGold',settings.gold)+colorField('لون أزرار الشراء','sBuy',settings.buy);
+categoryColors.innerHTML='';categories.forEach((c,i)=>{const row=document.createElement('div');row.className='color-row';const lab=document.createElement('span');lab.textContent=c;const inp=document.createElement('input');inp.type='color';inp.value=(settings.categoryColors||{})[c]||settings.accent;inp.dataset.category=c;row.append(lab,inp);categoryColors.append(row)});
+['phone1','phone2','phone1Label','phone2Label','phone1Color','phone2Color'].forEach(id=>document.getElementById(id).value=settings[id]||defaultSettings[id])}
+async function saveSettings(){const old=JSON.parse(JSON.stringify(settings));settings={...settings,pageBg:sPageBg.value,textColor:sTextColor.value,headerBg:sHeaderBg.value,accent:sAccent.value,gold:sGold.value,buy:sBuy.value,phone1:phone1.value.trim(),phone2:phone2.value.trim(),phone1Label:phone1Label.value.trim(),phone2Label:phone2Label.value.trim(),phone1Color:phone1Color.value,phone2Color:phone2Color.value,categoryColors:{...(settings.categoryColors||{})}};document.querySelectorAll('#categoryColors input[type=color]').forEach(i=>settings.categoryColors[i.dataset.category]=i.value);try{await persist();alert('تم حفظ الإعدادات')}catch(e){settings=old;alert('فشل الحفظ: '+e.message)}}
+async function resetColors(){if(!confirm('استعادة ألوان الموقع الافتراضية؟'))return;settings={...settings,...defaultSettings,categoryColors:{}};renderSettings();await saveSettings()}
+loadStoreData();
 </script></body></html>
